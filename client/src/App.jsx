@@ -1,7 +1,8 @@
 
-import React,{lazy} from "react";
+import React,{Suspense, lazy} from "react";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import ProtectRoute from "./components/auth/ProtectRoute";
+import { LayoutLoader } from "./components/layout/Loaders";
 // import Home from './pages/Home';
                 // OR
 const Home= lazy(()=> import("./pages/Home"));
@@ -20,6 +21,7 @@ function App() {
     <>
       <BrowserRouter>
       {/* <span>Header</span> */}
+      <Suspense fallback={<LayoutLoader />}>
         <Routes>
           <Route element={<ProtectRoute  user={user}/>}> 
 
@@ -39,6 +41,8 @@ function App() {
 
 <Route path='*' element={<NotFound/>} />
         </Routes>
+
+        </Suspense>
       </BrowserRouter>
        
      
